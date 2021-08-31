@@ -1,5 +1,9 @@
 	.file	"0-holberton.c"
 	.text
+	.section	.rodata
+.LC0:
+	.string	"Holberton"
+	.text
 	.globl	main
 	.type	main, @function
 main:
@@ -11,38 +15,33 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	subq	$32, %rsp
-	movq	%fs:40, %rax
+	subq	$16, %rsp
+	leaq	.LC0(%rip), %rax
 	movq	%rax, -8(%rbp)
-	xorl	%eax, %eax
-	movabsq	$8031169815276973896, %rax
-	movq	%rax, -18(%rbp)
-	movw	$110, -10(%rbp)
-	movl	$0, -24(%rbp)
+	movl	$0, -12(%rbp)
 	jmp	.L2
 .L3:
-	movl	-24(%rbp), %eax
-	cltq
-	movzbl	-18(%rbp,%rax), %eax
+	movl	-12(%rbp), %eax
+	movslq	%eax, %rdx
+	movq	-8(%rbp), %rax
+	addq	%rdx, %rax
+	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	_putchar@PLT
-	addl	$1, -24(%rbp)
+	addl	$1, -12(%rbp)
 .L2:
-	movl	-24(%rbp), %eax
-	cltq
-	movzbl	-18(%rbp,%rax), %eax
+	movl	-12(%rbp), %eax
+	movslq	%eax, %rdx
+	movq	-8(%rbp), %rax
+	addq	%rdx, %rax
+	movzbl	(%rax), %eax
 	movsbl	%al, %eax
-	cmpl	%eax, -24(%rbp)
+	cmpl	%eax, -12(%rbp)
 	jle	.L3
 	movl	$10, %edi
 	call	_putchar@PLT
 	movl	$0, %eax
-	movq	-8(%rbp), %rdx
-	xorq	%fs:40, %rdx
-	je	.L5
-	call	__stack_chk_fail@PLT
-.L5:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
