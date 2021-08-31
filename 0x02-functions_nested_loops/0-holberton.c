@@ -1,8 +1,11 @@
+#include <unistd.h>
 #include "main.h"
+
 /**
-*main - Contain function and loop
-*Return: return 0 success
-*/
+ * main - prints the text 'Holberton'
+ * none
+ * Return: int value 0
+ */
 
 int main(void)
 {
