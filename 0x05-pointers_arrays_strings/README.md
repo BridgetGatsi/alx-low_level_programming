@@ -1,0 +1,1 @@
+arrays and pointers 0*5
