@@ -1,14 +1,21 @@
+  
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
- * main - A program that prints it's name, folloewd by a new line.
- * @argc: The argument count
- * @argv: the rgument vector
- * Return: Always 0
+ *main - prints the program name
+ *@argc: captures the number of commands in the command line
+ *@argv: captures the strings in the command line
+ *Return: always 0
  */
-int main(int __attribute__((__unused__)) argc, char *argv[])
-{
-	printf("%s\n", argv[0]);
 
+int main(int argc, char *argv[])
+{
+	int i;
+
+	for (i = 0; i < argc; i++)
+	{
+		printf("%s\n", argv[i]);
+	}
 	return (0);
 }
