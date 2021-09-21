@@ -1,45 +1,54 @@
-     
-/*
- * File: 2-str_concat.c
- * Author: Ukonu Divine Chisom
- */
-
-#include "main.h"
 #include <stdlib.h>
+#include "main.h"
 
 /**
- * str_concat - Concatenates two strings.
- * @s1: The string to be concatenated upon.
- * @s2: The string to be concatenated to s1.
- *
- * Return: If concatenation fails - NULL.
- *         Otherwise - a pointer the newly-allocated space in memory
- *                     containing the concatenated strings.
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
+ */
+int _strlen(char *s)
+{
+	int length = 0;
+
+	while (*s)
+	{
+		s++;
+		length++;
+	}
+	return (length);
+}
+
+/**
+ * str_concat - concatenates two strings
+ * @s1: first string
+ * @s2: second string
+ * Return: concatenated strings
  */
 char *str_concat(char *s1, char *s2)
 {
-	char *p_str;
-	int i, index = 0, len = 0;
+	char *cat, *_cat;
 
 	if (s1 == NULL)
 		s1 = "";
-
 	if (s2 == NULL)
 		s2 = "";
 
-	for (i = 0; s1[i] || s2[i]; i++)
-		len++;
-
-	p_str = malloc(sizeof(char) * len);
-
-	if (p_str == NULL)
+	cat = malloc(sizeof(char) * (_strlen(s1) + _strlen(s2)) + 1);
+	if (!cat)
 		return (NULL);
-
-	for (i = 0; s1[i]; i++)
-		p_str[index++] = s1[i];
-
-	for (i = 0; s2[i]; i++)
-		p_str[index++] = s2[i];
-
-	return (p_str);
+	_cat = cat;
+	while (*s1)
+	{
+		*_cat = *s1;
+		_cat++;
+		s1++;
+	}
+	while (*s2)
+	{
+		*_cat = *s2;
+		_cat++;
+		s2++;
+	}
+	*_cat = '\0';
+	return (cat);
 }
