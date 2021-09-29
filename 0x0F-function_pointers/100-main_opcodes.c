@@ -1,34 +1,44 @@
-/*
- * File: 100-main_opcodes.c
- * Author: Ukonu Divine Chisom
- */
-#include "function_pointers.h"
-
-/*
-*Intresting note: functions are a set of instruction and
-*function pointers are pointers to the begning of this instruction
-*so if we could get the first instrucions adress inmemory
-*we can see what it is doing by printing the adresses
-*/
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * main - print opcodes of its own main function
- * @argc: number of arguments
- * @argv: vector of arguments
- * Return: 0 if no errors
- */
+ * main - Entry point
+ *
+ * Description: A program that prints the opcodes
+ *              of its own main function.
+ *              Usage: ./main number_of_bytes
+ *
+ * @argc: argument counter
+ * @argv: argument vector
+ *
+ * Return: Always Successful
+*/
+
 int main(int argc, char *argv[])
 {
-	register int i, num;
-	char *ptr = (char *)main;
+	int index, nbytes;
+	char *ptr = (char *) main;
 
 	if (argc != 2)
-		printf("Error\n"), exit(1);
-	num = atoi(argv[1]);
-	if (num < 0)
-		printf("Error\n"), exit(2);
-	for (i = 0; i < num - 1; i++)
-		printf("%02hhx ", ptr[i]);
-	printf("%02hhx\n", ptr[i]);
+	{
+		printf("Error\n");
+		exit(1);
+	}
+
+	nbytes = atoi(argv[1]);
+	if (nbytes < 0)
+	{
+		printf("Error\n");
+		exit(2);
+	}
+
+	for (index = 0; index < nbytes; index++)
+	{
+		printf("%02x", ptr[index] & 0xFF);
+		if (index != nbytes - 1)
+			printf(" ");
+	}
+	printf("\n");
 	return (0);
 }
